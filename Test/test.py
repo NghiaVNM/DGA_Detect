@@ -1,5 +1,5 @@
 # Đọc dữ liệu từ tệp data.txt và tạo danh sách domains
-file_path = '../Dataset/Alexa_Benign.txt'  # Đường dẫn tới tệp data.txt
+file_path = '../Dataset/Raw/Full/Alexa_Benign.txt'  # Đường dẫn tới tệp data.txt
 
 # Mở tệp và đọc các domain từ tệp
 with open(file_path, 'r') as file:

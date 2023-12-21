@@ -4,10 +4,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 
 # Đọc dữ liệu từ file Zeus.txt và Alexa_Benign.txt
-with open('../Dataset/Zeus.txt', 'r') as file:
+with open('../Dataset/Raw/Full/Zeus.txt', 'r') as file:
     bot_data = file.readlines()
 
-with open('../Dataset/Alexa_Benign.txt', 'r') as file:
+with open('../Dataset/Raw/Full/Alexa_Benign.txt', 'r') as file:
     people_data = file.readlines()
 
 # Gán nhãn cho dữ liệu: 1 - botnet, 0 - người

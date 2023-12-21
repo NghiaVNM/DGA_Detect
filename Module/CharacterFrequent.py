@@ -20,8 +20,8 @@ def calculateProbability(text):
     # Calculate the average probability
     return total_probability / total_count if total_count > 0 else 0
 
-''' Result'''
-# People's domain
-print(calculateProbability("google.com"))
-# Botnet's domain
-print(calculateProbability("xgxhpyfwlrxdw.com"))
+''' 
+Test : 
+print(calculateProbability("google.com"))   # People
+print(calculateProbability("xgxhpyfwlrxdw.com"))    # Botnet
+'''
