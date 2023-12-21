@@ -8,14 +8,14 @@ import matplotlib.pyplot as plt
 import scipy.sparse as sp
 
 # Path to csv file
-people_path = "../Dataset/Processed/Short/Alexa_BenignShort_Processed.csv"
-cryptolocker_path = "../Dataset/Processed/Short/CryptolockerShort_Processed.csv"
-zeus_path = "../Dataset/Processed/Short/ZeusShort_Processed.csv"
-pushdo_path = "../Dataset/Processed/Short/PushdoShort_Processed.csv"
-rovnix_path = "../Dataset/Processed/Short/RovnixShort_Processed.csv"
-tinba_path = "../Dataset/Processed/Short/TinbaShort_Processed.csv"
-matsnu_path = "../Dataset/Processed/Short/MatsnuShort_Processed.csv"
-ramdo_path = "../Dataset/Processed/Short/RamdoShort_Processed.csv"
+people_path = "../Dataset/Processed/Full/Alexa_Benign_Processed.csv"
+cryptolocker_path = "../Dataset/Processed/Full/Cryptolocker_Processed.csv"
+zeus_path = "../Dataset/Processed/Full/Zeus_Processed.csv"
+pushdo_path = "../Dataset/Processed/Full/Pushdo_Processed.csv"
+rovnix_path = "../Dataset/Processed/Full/Rovnix_Processed.csv"
+tinba_path = "../Dataset/Processed/Full/Tinba_Processed.csv"
+matsnu_path = "../Dataset/Processed/Full/Matsnu_Processed.csv"
+ramdo_path = "../Dataset/Processed/Full/Ramdo_Processed.csv"
 
 # Read data from csv
 people_data = pd.read_csv(people_path)
