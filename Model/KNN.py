@@ -99,9 +99,10 @@ with PdfPages('../Result/KNN_Confusion_Matrix.pdf') as pdf:
     pdf.savefig()
     plt.close()
 
-# Print evaluation results
-print(f"Accuracy: {accuracy:.2f}")
-print(f"Precision: {precision:.2f}")
-print(f"Recall: {recall:.2f}")
-print(f"ROC AUC: {roc_auc:.2f}")
-print(f"Confusion Matrix:\n{conf_matrix}")
+# Save evaluation result
+with open('../Result/KNN.txt', 'w') as file:
+    file.write(f"Accuracy: {accuracy:.2f}\n")
+    file.write(f"Precision: {precision:.2f}\n")
+    file.write(f"Recall: {recall:.2f}\n")
+    file.write(f"ROC AUC: {roc_auc:.2f}\n")
+    file.write(f"Confusion Matrix:\n{conf_matrix}\n")

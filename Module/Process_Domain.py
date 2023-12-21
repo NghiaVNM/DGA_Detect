@@ -1,11 +1,11 @@
 import os
 import csv
-
 import TypingDifficulty
 import CharacterFrequent
 
 directory_input = ''
 directory_output = '../Dataset/Processed/Short'
+
 
 def Process_Domain(input_directory, output_directory):
     for filename in os.listdir(input_directory):
@@ -18,14 +18,22 @@ def Process_Domain(input_directory, output_directory):
 
             # Write in CSV
             with open(output_path, 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile)
+                fieldnames = ['Domain', 'TypingDifficult', 'CharacterFrequent']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+                writer.writeheader()  # Write column names
+
                 for line in lines:
                     input_text = line.strip()
 
                     typing_difficult_score = TypingDifficulty.typing_difficulty_score(input_text)
                     character_frequent = CharacterFrequent.calculateProbability(input_text)
-                    writer.writerow([input_text, typing_difficult_score, character_frequent])
 
-Process_Domain("../Dataset/Raw/Short", "../Dataset/Processed/Short")
+                    writer.writerow({
+                        'Domain': input_text,
+                        'TypingDifficult': typing_difficult_score,
+                        'CharacterFrequent': character_frequent
+                    })
 
 
+Process_Domain("../Dataset/Raw/Full", "../Dataset/Processed/Full")
