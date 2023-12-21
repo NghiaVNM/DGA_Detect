@@ -1,25 +1,27 @@
-from nltk.corpus import wordnet
-import string
+# Đọc dữ liệu từ tệp data.txt và tạo danh sách domains
+file_path = '../Dataset/Alexa_Benign.txt'  # Đường dẫn tới tệp data.txt
 
-def calculate_random_word_ratio(text):
-    words = text.split()
-    total_words = len(words)
-    random_word_count = 0
+# Mở tệp và đọc các domain từ tệp
+with open(file_path, 'r') as file:
+    data_lines = file.readlines()
 
-    for word in words:
-        # Loại bỏ dấu câu và chữ số trong từ
-        word = word.translate(str.maketrans('', '', string.punctuation)).lower()
-        word = ''.join([i for i in word if not i.isdigit()])
+# Tạo danh sách domains từ các dòng dữ liệu trong tệp
+domains_list = [line.strip().lower() for line in data_lines]  # Chuyển đổi về chữ thường
 
-        # Kiểm tra xem từ có trong WordNet hay không
-        synsets = wordnet.synsets(word)
-        if not synsets:
-            random_word_count += 1
+# Hàm tính độ hiếm của domain
+def calculate_rarity_of_domain(domain, dataset):
+    domain = domain.lower()  # Chuyển đổi domain cần kiểm tra về chữ thường
+    domain_count = dataset.count(domain)
+    total_domains = len(dataset)
 
-    random_word_ratio = random_word_count / total_words if total_words > 0 else 0
-    return random_word_ratio
+    if total_domains > 0:
+        rarity_score = domain_count / total_domains
+        return rarity_score
+    else:
+        print('no')
+        return 0  # Trường hợp không có dữ liệu
 
-# Sử dụng hàm với một đoạn văn bản
-input_text = "google.com"
-ratio = calculate_random_word_ratio(input_text)
-print(f"Random Word Ratio: {ratio:.2f}")
+# Sử dụng hàm để xác định độ hiếm của domain cụ thể trong tập dữ liệu lớn
+specific_domain = "paoajknkjzaiojdksd"  # Domain cụ thể bạn muốn xác định
+rarity = calculate_rarity_of_domain(specific_domain, domains_list)
+print(f"Rarity of Domain '{specific_domain}': {rarity}")

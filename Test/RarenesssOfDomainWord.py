@@ -1,29 +1,27 @@
-# Giả định UNIGRAMS là một từ điển có thông tin về tần suất xuất hiện của các từ trong ngữ liệu
-UNIGRAMS = {
-    'word1': 15000,
-    'word2': 8000,
-    'word3': 5000,
-    # ...
-}
+# Đọc dữ liệu từ tệp data.txt và tạo danh sách domains
+file_path = '../Dataset/Alexa_Benign.txt'  # Đường dẫn tới tệp data.txt
 
-def rareness_of_domain_words(words):
-    random_word_count = 0
-    rare_word_count = 0
-    common_word_count = 0
+# Mở tệp và đọc các domain từ tệp
+with open(file_path, 'r') as file:
+    data_lines = file.readlines()
 
-    for word in words:
-        if UNIGRAMS.get(word) is None:  # Nếu từ không có trong unigram
-            random_word_count += 1
-        elif UNIGRAMS.get(word) < 10000:  # Nếu từ có tần suất xuất hiện ít hơn 10,000 lần
-            rare_word_count += 1
-        else:  # Nếu từ có tần suất xuất hiện lớn hơn hoặc bằng 10,000 lần
-            common_word_count += 1
+# Tạo danh sách domains từ các dòng dữ liệu trong tệp
+domains_list = [line.strip().lower() for line in data_lines]  # Chuyển đổi về chữ thường
 
-    return random_word_count, rare_word_count, common_word_count
+# Hàm tính độ hiếm của domain
+def calculate_rarity_of_domain(domain, dataset):
+    domain = domain.lower()  # Chuyển đổi domain cần kiểm tra về chữ thường
+    domain_count = dataset.count(domain)
+    total_domains = len(dataset)
 
-# Example usage:
-input_words = ['word1', 'word2', 'word3', 'word4', 'word5']
-random_count, rare_count, common_count = rareness_of_domain_words(input_words)
-print(f"Random Words: {random_count}")
-print(f"Rare Words: {rare_count}")
-print(f"Common Words: {common_count}")
+    if total_domains > 0:
+        rarity_score = domain_count / total_domains
+        return rarity_score
+    else:
+        print('no')
+        return 0  # Trường hợp không có dữ liệu
+
+# Sử dụng hàm để xác định độ hiếm của domain cụ thể trong tập dữ liệu lớn
+#specific_domain = "paoajknkjzaiojdksd"  # Domain cụ thể bạn muốn xác định
+#rarity = calculate_rarity_of_domain(specific_domain, domains_list)
+#print(f"Rarity of Domain '{specific_domain}': {rarity}")

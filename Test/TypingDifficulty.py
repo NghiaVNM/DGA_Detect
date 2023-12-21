@@ -1,69 +1,59 @@
 from nltk.corpus import wordnet
+import string
+import RarenesssOfDomainWord  # Import your custom module
+
+# File path to the data.txt file
+file_path = '../Dataset/Alexa_Benign.txt'
+
+# Read data from the file and create a list of domains
+with open(file_path, 'r') as file:
+    data_lines = file.readlines()
+
+# Convert data lines to lowercase and strip extra whitespace
+domains_list = [line.strip().lower() for line in data_lines]
 
 def typing_difficulty_score(text):
-    keys_weight = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10,
-                   'k': 11, 'l': 12, 'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19,
-                   't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26}  # Assign keys weight
-    weight = 0
+    keys_weight = {
+        'a': 3, 'b': 4, 'c': 6, 'd': 3, 'e': 2, 'f': 3, 'g': 4, 'h': 5, 'i': 2, 'j': 4,
+        'k': 5, 'l': 4, 'm': 3, 'n': 4, 'o': 2, 'p': 3, 'q': 3, 'r': 3, 's': 5, 't': 3,
+        'u': 2, 'v': 5, 'w': 3, 'x': 7, 'y': 4, 'z': 6
+    }
 
-    # Calculate ratios
+    weight = 0
     text_length = len(text)
-    number_ratio = digit_count(text) / text_length  # Adjust based on your data for number ratio
-    hyphen_ratio = text.count('-') / text_length  # Adjust based on your data for hyphen ratio
-    # Calculate other ratios (digraph, trigraph, rare word, etc.) - you'll need to implement these functions
+
+    number_ratio = digit_count(text) / text_length
+    hyphen_ratio = text.count('-') / text_length
+
     digraph_ratio = calculate_digraph_count(text) / text_length
-    rare_word_ratio = calculate_rare_word_count(text) / text_length
+    rare_word_ratio = RarenesssOfDomainWord.calculate_rarity_of_domain(text, domains_list)
     random_word_ratio = calculate_random_word_count(text) / text_length
 
-    # Calculate weight
     weight += sum(keys_weight.get(char.lower(), 0) for char in text)
     weight += number_ratio + hyphen_ratio + digraph_ratio + rare_word_ratio + random_word_ratio
-    weight -= consecutive_letters(text)  # Decrease weight for each 3 consecutive letters
+    weight -= consecutive_letters(text)
 
     return weight
 
 def digit_count(text):
-    count = 0  # Khởi tạo biến để đếm số lượng chữ số
-
-    # Duyệt qua từng ký tự trong chuỗi
-    for char in text:
-        # Kiểm tra nếu ký tự là chữ số (từ '0' đến '9')
-        if char.isdigit():
-           count += 1  # Nếu là chữ số, tăng biến đếm lên 1
-
-    return count  # Trả về số lượng chữ số trong chuỗi
+    count = sum(1 for char in text if char.isdigit())
+    return count
 
 def calculate_digraph_count(text):
-    digraph_freq = {}  # Tần suất của digraphs
+    digraph_freq = {}
 
-    # Tính tần suất của digraphs
     for i in range(len(text) - 1):
-        digraph = text[i:i+2]  # Lấy một cặp ký tự (digraph)
+        digraph = text[i:i+2]
         if len(digraph) == 2:
-            if digraph in digraph_freq:
-                digraph_freq[digraph] += 1
-            else:
-                digraph_freq[digraph] = 1
+            digraph_freq[digraph] = digraph_freq.get(digraph, 0) + 1
 
     return len(digraph_freq)
 
-
-def calculate_rare_word_count(text):
-    # Function to calculate rare word count
-    # Implement this function based on your algorithm to count rare words in the text
-    pass
-
-
 def calculate_random_word_count(text):
-    words = text.split()
     random_word_count = 0
 
-    for word in words:
-        # Loại bỏ dấu câu và chữ số trong từ
-        word = word.translate(str.maketrans('', '', string.punctuation)).lower()
-        word = ''.join([i for i in word if not i.isdigit()])
-
-        # Kiểm tra xem từ có trong WordNet hay không
+    for word in text.split():
+        word = ''.join(filter(lambda x: x.isalpha(), word.lower()))
         synsets = wordnet.synsets(word)
         if not synsets:
             random_word_count += 1
@@ -71,15 +61,10 @@ def calculate_random_word_count(text):
     return random_word_count
 
 def consecutive_letters(text):
-    # Function to calculate consecutive letters count
-    count = 0
-    for i in range(len(text) - 2):
-        if text[i] == text[i + 1] == text[i + 2]:
-            count += 1
+    count = sum(1 for i in range(len(text) - 2) if text[i] == text[i + 1] == text[i + 2])
     return count
 
-
 # Example usage:
-input_text = "Your input text here"
+input_text = "uit.edu.vn"
 difficulty_score = typing_difficulty_score(input_text)
 print(f"Typing Difficulty Score: {difficulty_score}")

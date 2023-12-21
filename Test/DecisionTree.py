@@ -3,6 +3,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 
+import RarenesssOfDomainWord
+
 # Đọc dữ liệu từ file Zeus.txt và Alexa_Benign.txt
 with open('../Dataset/Zeus.txt', 'r') as file:
     bot_data = file.readlines()
