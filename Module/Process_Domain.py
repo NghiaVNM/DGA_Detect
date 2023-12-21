@@ -3,10 +3,6 @@ import csv
 import TypingDifficulty
 import CharacterFrequent
 
-directory_input = ''
-directory_output = '../Dataset/Processed/Short'
-
-
 def Process_Domain(input_directory, output_directory):
     for filename in os.listdir(input_directory):
         if filename.endswith(".txt"):

@@ -79,6 +79,7 @@ def typing_difficulty_score(domain):
     weight = 0
     text_length = len(domain)
 
+
     # Calculate number's ratio
     number_ratio = digit_count(domain) / text_length
 
