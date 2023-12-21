@@ -1,8 +1,9 @@
 from nltk.corpus import wordnet
 import string
-import RarenesssOfDomainWord  # Import your custom module
 
-# File path to the data.txt file
+import RarenesssOfDomainWord
+
+# File path to people's domain
 file_path = '../Dataset/Alexa_Benign.txt'
 
 # Read data from the file and create a list of domains
@@ -12,20 +13,26 @@ with open(file_path, 'r') as file:
 # Convert data lines to lowercase and strip extra whitespace
 domains_list = [line.strip().lower() for line in data_lines]
 
-def typing_difficulty_score(text):
-    keys_weight = {
-        'a': 3, 'b': 4, 'c': 6, 'd': 3, 'e': 2, 'f': 3, 'g': 4, 'h': 5, 'i': 2, 'j': 4,
-        'k': 5, 'l': 4, 'm': 3, 'n': 4, 'o': 2, 'p': 3, 'q': 3, 'r': 3, 's': 5, 't': 3,
-        'u': 2, 'v': 5, 'w': 3, 'x': 7, 'y': 4, 'z': 6
-    }
+keys_weight = {
+    'a': 3, 'b': 4, 'c': 6, 'd': 3, 'e': 2, 'f': 3, 'g': 4, 'h': 5, 'i': 2, 'j': 4,
+    'k': 5, 'l': 4, 'm': 3, 'n': 4, 'o': 2, 'p': 3, 'q': 3, 'r': 3, 's': 5, 't': 3,
+    'u': 2, 'v': 5, 'w': 3, 'x': 7, 'y': 4, 'z': 6
+}
 
+def typing_difficulty_score(text):
     weight = 0
     text_length = len(text)
 
+    # Calculate number's ratio
     number_ratio = digit_count(text) / text_length
+
+    # Calculate hyphen's ratio
     hyphen_ratio = text.count('-') / text_length
 
+    # Calculate digraph and trigraph ratio
     digraph_ratio = calculate_digraph_count(text) / text_length
+
+
     rare_word_ratio = RarenesssOfDomainWord.calculate_rarity_of_domain(text, domains_list)
     random_word_ratio = calculate_random_word_count(text) / text_length
 
