@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import scipy.sparse as sp
 
 # Paths to CSV files
+''' Full dataset
 people_path = "../Dataset/Processed/Full/Alexa_Benign_Processed.csv"
 cryptolocker_path = "../Dataset/Processed/Full/Cryptolocker_Processed.csv"
 zeus_path = "../Dataset/Processed/Full/Zeus_Processed.csv"
@@ -16,6 +17,16 @@ rovnix_path = "../Dataset/Processed/Full/Rovnix_Processed.csv"
 tinba_path = "../Dataset/Processed/Full/Tinba_Processed.csv"
 matsnu_path = "../Dataset/Processed/Full/Matsnu_Processed.csv"
 ramdo_path = "../Dataset/Processed/Full/Ramdo_Processed.csv"
+'''
+
+people_path = "../Dataset/Processed/Short/Alexa_BenignShort_Processed.csv"
+cryptolocker_path = "../Dataset/Processed/Short/CryptolockerShort_Processed.csv"
+zeus_path = "../Dataset/Processed/Short/ZeusShort_Processed.csv"
+pushdo_path = "../Dataset/Processed/Short/PushdoShort_Processed.csv"
+rovnix_path = "../Dataset/Processed/Short/RovnixShort_Processed.csv"
+tinba_path = "../Dataset/Processed/Short/TinbaShort_Processed.csv"
+matsnu_path = "../Dataset/Processed/Short/MatsnuShort_Processed.csv"
+ramdo_path = "../Dataset/Processed/Short/RamdoShort_Processed.csv"
 
 # Read data from CSV files
 people_data = pd.read_csv(people_path)
@@ -62,7 +73,7 @@ y_pred = svm.predict(X_test)
 
 # Evaluation
 accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, zero_division=1)
 recall = recall_score(y_test, y_pred)
 fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba[:, 1])
 roc_auc = roc_auc_score(y_test, y_pred_proba[:, 1])
