@@ -1,0 +1,7 @@
+Accuracy: 0.99
+Precision: 0.00
+Recall: 0.00
+ROC AUC: 0.92
+Confusion Matrix:
+[[66673     0]
+ [  780     0]]
