@@ -73,7 +73,7 @@ y_pred = neural_network.predict(X_test)
 
 # Evaluation
 accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, zero_division=1)
 recall = recall_score(y_test, y_pred)
 fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba[:, 1])
 roc_auc = roc_auc_score(y_test, y_pred_proba[:, 1])
