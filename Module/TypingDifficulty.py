@@ -15,8 +15,8 @@ def keys_weight_score(text):
     return sum(keys_weight.get(char.lower(), 0) for char in text)
 '''
 Test :
-print(keys_weight_score("google.com"))  # People
-print(keys_weight_score("uj9gz24qeeni1lby2l214idsv6.net"))  # Botnet
+print("google.com : " + str(keys_weight_score("google.com")))  # People
+print("uj9gz24qeeni1lby2l214idsv6.net : " + str(keys_weight_score("uj9gz24qeeni1lby2l214idsv6.net")))  # Botnet
 '''
 
 def digit_count(text):
@@ -24,8 +24,8 @@ def digit_count(text):
     return count
 '''
 Test :
-print(digit_count("google.com"))    # People
-print(digit_count("uj9gz24qeeni1lby2l214idsv6.net"))    # Botnet
+print("google.com : " + str(digit_count("google.com")))    # People
+print("uj9gz24qeeni1lby2l214idsv6.net : " + str(digit_count("uj9gz24qeeni1lby2l214idsv6.net")))    # Botnet
 '''
 
 def digraph_and_triagraph_count(text):
@@ -61,8 +61,8 @@ def random_word_count(text):
     return count
 '''
 Test : 
-print(random_word_count("google.com"))      # People
-print(random_word_count("uj9gz24qeeni1lby2l214idsv6.net"))     # Botnet
+print("google.com : " + str(random_word_count("google.com")))      # People
+print("uj9gz24qeeni1lby2l214idsv6.net : " + str(random_word_count("uj9gz24qeeni1lby2l214idsv6.net")))    # Botnet
 '''
 
 def consecutive_letters(text):
@@ -70,8 +70,8 @@ def consecutive_letters(text):
     return count
 '''
 Test :
-print(consecutive_letters("google.com"))    # People
-print(consecutive_letters("uj9gz24qeeeni1lby2l214idsv6.net"))   # Botnet
+print("google.com : " + str(consecutive_letters("google.com")))    # People
+print("uj9gz24qeeeni1lby2l214idsv6.net : " + str(consecutive_letters("uj9gz24qeeeni1lby2l214idsv6.net")))   # Botnet
 '''
 
 
@@ -104,6 +104,6 @@ def typing_difficulty_score(domain):
     return weight
 '''
 Test :
-print(typing_difficulty_score("google.com"))    # People
-print(typing_difficulty_score("uj9gz24qeeni1lby2l214idsv6.net"))    # Botnet
+print("google.com : " + str(typing_difficulty_score("google.com")))    # People
+print("uj9gz24qeeni1lby2l214idsv6.net : " + str(typing_difficulty_score("uj9gz24qeeni1lby2l214idsv6.net")))    # Botnet
 '''

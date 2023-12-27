@@ -25,6 +25,6 @@ def calculate_rarity_of_domain(domain):
 
 ''' 
 Test :
-print(calculate_rarity_of_domain("google.com"))     # People
-print(calculate_rarity_of_domain("xgxhpyfwlrxdw.com"))      # Botnet
+print("google.com : " + str(calculate_rarity_of_domain("google.com")))    # People
+print("xgxhpyfwlrxdw.com : " + str(calculate_rarity_of_domain("xgxhpyfwlrxdw.com")))     # Botnet
 '''

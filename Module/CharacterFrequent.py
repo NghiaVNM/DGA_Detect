@@ -21,7 +21,6 @@ def calculateProbability(text):
     return total_probability / total_count if total_count > 0 else 0
 
 ''' 
-Test : 
-print(calculateProbability("google.com"))   # People
-print(calculateProbability("xgxhpyfwlrxdw.com"))    # Botnet
-'''
+Test : '''
+print("google.com : " + str(calculateProbability("google.com")))   # People
+print("xgxhpyfwlrxdw.com : " + str(calculateProbability("xgxhpyfwlrxdw.com")))    # Botnet
